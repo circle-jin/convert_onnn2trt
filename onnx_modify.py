@@ -17,22 +17,6 @@ def convert_pow_to_mul(graph):
         graph (onnx.ModelProto): loaded onnx model graph
     """
     print('[pow-mul] start')
-    index = []
-    for i in range(0, len(graph.node)):
-        if graph.node[i].name.find('Pow') == 0:
-            index = i
-            input_node = [graph.node[i].input[0], graph.node[i].input[0]]
-            output_node = graph.node[i].output
-
-
-            Mul_node = onnx.helper.make_node(
-                name="Mul_"+str(index),  # Name is optional.
-                op_type="Mul",
-                inputs=input_node,
-                outputs=output_node
-            )
-            graph.node.remove(graph.node[index]) 
-            graph.node.insert(index, Mul_node)
     print('[pow-mul] end')
 
 def convert_split_to_slice(graph):
